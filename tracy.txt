@@ -1,0 +1,11 @@
+1.TracyView::View
+2.TracyWorker::Worker   
+3.TracyWorker::Worker::DataBlock
+4.TracyWorker::Worker::DataBlock::callstackFrameMap
+5.TracyWorker::Worker::DataBlock::plots
+6.TimelineItemPlot::DrawContents
+7. View::DrawFrames()
+8. view::m_frames.frames
+9. View::SetViewToLastFrames() 设置显示最近3帧模式
+10. View::HandleTimelineMouse ->  if( wheel != 0 )  取消固定帧长度模式
+11. View::m_vd.drawZones -> View::DrawZoneLevel控制画堆栈格子
