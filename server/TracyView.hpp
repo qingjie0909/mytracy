@@ -248,6 +248,8 @@ private:
     void DrawRangeEntry( Range& range, const char* label, uint32_t color, const char* popupLabel, int id );
     void DrawSourceTooltip( const char* filename, uint32_t line, int before = 3, int after = 3, bool separateTooltip = true );
     void DrawWaitStacks();
+    void ShowNewestFrames();
+    void ClearOldData();
 
     void ListMemData( std::vector<const MemEvent*>& vec, std::function<void(const MemEvent*)> DrawAddress, const char* id = nullptr, int64_t startTime = -1, uint64_t pool = 0 );
 
@@ -457,6 +459,7 @@ private:
     uint64_t m_gpuThread = 0;
     int64_t m_gpuStart = 0;
     int64_t m_gpuEnd = 0;
+    int m_LimitFrame = 3;
 
     bool m_showOptions = false;
     bool m_showMessages = false;
@@ -466,6 +469,9 @@ private:
     bool m_showCpuDataWindow = false;
     bool m_showAnnotationList = false;
     bool m_showWaitStacks = false;
+
+    bool m_newestFrame = false;
+    ImGuiTextFilter m_newestFrameInput = ImGuiTextFilter("3");
 
     AccumulationMode m_statAccumulationMode = AccumulationMode::SelfOnly;
     bool m_statSampleTime = true;

@@ -51,6 +51,7 @@ View::View( void(*cbMainThread)(std::function<void()>, bool), const char* addr, 
     , m_staticView( false )
     , m_viewMode( ViewMode::LastFrames )
     , m_viewModeHeuristicTry( true )
+    , m_newestFrame(true)
     , m_forceConnectionPopup( true, true )
     , m_tc( *this, m_worker )
     , m_frames( nullptr )
@@ -742,13 +743,15 @@ bool View::DrawImpl()
         }
         if( ImGui::BeginPopup( "viewMode" ) )
         {
-            if( ImGui::Selectable( ICON_FA_MAGNIFYING_GLASS_PLUS " Newest three frames" ) )
+            if( ImGui::Selectable( ICON_FA_MAGNIFYING_GLASS_PLUS " Newest frames" ) )
             {
                 m_viewMode = ViewMode::LastFrames;
+                m_newestFrame = true;
             }
             if( ImGui::Selectable( ICON_FA_RULER_HORIZONTAL " Use current zoom level" ) )
             {
                 m_viewMode = ViewMode::LastRange;
+                m_newestFrame = false;
             }
             ImGui::EndPopup();
         }
@@ -777,6 +780,10 @@ bool View::DrawImpl()
         if( ImGui::Button( ICON_FA_POWER_OFF ) ) keepOpen = false;
         ImGui::PopStyleColor( 3 );
     }
+    ImGui::SameLine();
+    m_newestFrameInput.Draw(" ", 100);
+    ImGui::SameLine();
+    ToggleButton(ICON_FA_RULER " NewestFrame", m_newestFrame);
     ImGui::SameLine();
     ToggleButton( ICON_FA_GEAR " Options", m_showOptions );
     ImGui::SameLine();
@@ -976,6 +983,7 @@ bool View::DrawImpl()
 
     DrawInfoWindow();
 
+    if (m_newestFrame) ShowNewestFrames();
     if( m_showOptions ) DrawOptions();
     if( m_showMessages ) DrawMessages();
     if( m_findZone.show ) DrawFindZone();
@@ -1281,6 +1289,18 @@ void View::HighlightThread( uint64_t thread )
 {
     m_drawThreadMigrations = thread;
     m_drawThreadHighlight = thread;
+}
+
+void View::ShowNewestFrames()
+{
+    if (m_viewMode != ViewMode::LastFrames)
+        m_viewMode = ViewMode::LastFrames;
+    m_LimitFrame = atoi(m_newestFrameInput.InputBuf);
+}
+
+void View::ClearOldData()
+{
+    m_worker.ClearOldData(m_vd.zvStart);
 }
 
 }

@@ -203,7 +203,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 #endif // #if DO_COMPUTE_GPU
 
 
-    static int framesLeft = 10;
+    static int framesLeft = 22;
 
     // Main message loop
     MSG msg = { 0 };

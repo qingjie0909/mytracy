@@ -10,8 +10,8 @@
 #define CPU_CAN_DO_SIMD 0
 #define CPU_CAN_DO_THREADS 0
 #else
-#define CPU_CAN_DO_SIMD 1
-#define CPU_CAN_DO_THREADS 1
+#define CPU_CAN_DO_SIMD 0
+#define CPU_CAN_DO_THREADS 0
 #endif
 
 

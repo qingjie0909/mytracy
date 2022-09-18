@@ -662,7 +662,7 @@ public:
     void DoPostponedWorkAll();
 
     void CacheSourceFiles();
-
+    void ClearOldData(int64_t zvStart);
 private:
     void Network();
     void Exec();

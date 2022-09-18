@@ -8747,4 +8747,17 @@ void Worker::CacheSourceFiles()
     }
 }
 
+void Worker::ClearOldData(int64_t zvStart)
+{/*
+    std::lock_guard<std::mutex> lock(m_data.lock);
+    const auto& threadData = GetThreadData();
+    for (const auto& pthread : threadData)
+    {
+        auto vec = pthread->timeline;
+        auto it = std::lower_bound(vec.begin(), vec.end(), std::max<int64_t>(0, zvStart), [](const auto& l, const auto& r) { VectorAdapterPointer<ZoneEvent> a; return (uint64_t)a(l).End() < (uint64_t)r; });
+           
+
+    }<img src="D:\»ðÐÇ\~temp\1f98261cebda3b5d11f4adaad22bde6d.png"/>*/
+}
+
 }

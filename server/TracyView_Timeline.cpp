@@ -120,7 +120,11 @@ void View::HandleTimelineMouse( int64_t timespan, const ImVec2& wpos, float w, d
     const auto wheel = io.MouseWheel;
     if( wheel != 0 )
     {
-        if( m_viewMode == ViewMode::LastFrames ) m_viewMode = ViewMode::LastRange;
+        if (m_viewMode == ViewMode::LastFrames)
+        {
+            m_viewMode = ViewMode::LastRange;
+            m_newestFrame = false;
+        }
         const double mouse = io.MousePos.x - wpos.x;
         const auto p = mouse / w;
 

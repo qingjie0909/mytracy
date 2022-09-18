@@ -134,7 +134,7 @@ void View::SetViewToLastFrames()
 {
     const int total = m_worker.GetFrameCount( *m_frames );
 
-    m_vd.zvStart = m_worker.GetFrameBegin( *m_frames, std::max( 0, total - 4 ) );
+    m_vd.zvStart = m_worker.GetFrameBegin( *m_frames, std::max( 0, total -1 - m_LimitFrame) );
     if( total == 1 )
     {
         m_vd.zvEnd = m_worker.GetLastTime();
@@ -147,6 +147,7 @@ void View::SetViewToLastFrames()
     {
         m_vd.zvEnd = m_worker.GetLastTime();
     }
+    ClearOldData();
 }
 
 }
